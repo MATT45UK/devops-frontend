@@ -20,14 +20,15 @@ const PrivateRoute = (props) => {
     React.useEffect(() => {
         let token = Cookie.get("id_token")
         auth.validate(token, (err, data) => {
-            if (!err) {
+            console.log(err, data)
+            if (!err && Object.entries(user).length === 0) {
                 setRender(Array.isArray(children) ? children : [children])
                 setUser(data)
-            } else {
+            } else if (render.length === 0) {
                 setRender([<Redirect to={{ pathname: `/login`, state: { from: location } }} />])
             }
         });
-    }, [])
+    }, [render])
 
     if (Object.entries(user).length !== 0) {
         return (
@@ -42,8 +43,11 @@ const PrivateRoute = (props) => {
                 }
             />
         );
-    } else {
+    } else if (render.length === 0) {
         return 'Loading...'
+    }
+    else {
+        return render
     }
 
 }
