@@ -5,11 +5,12 @@ module.exports = {
                 "Authorization": `Bearer ${token}`
             }
         })
-            .then(response => {
-                if (response.status === 200) {
-                    callback(null, true)
+            .then(response => response.json())
+            .then(data => {
+                if (data.email_verified) {
+                    callback(null, { data, res: true })
                 } else {
-                    callback(response.status, false)
+                    callback(data.status, { data: null, res: false })
                 }
             });
     }

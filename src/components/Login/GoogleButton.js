@@ -1,20 +1,11 @@
-import React from 'react';
 import { GoogleLogin } from 'react-google-login';
 import {
     useLocation
 } from "react-router-dom";
-import auth from '../contollers/auth.controller'
+import auth from '../../contollers/auth.controller'
 import Cookie from "js-cookie"
 import { Redirect } from 'react-router-dom'
-
-function LoginPage(props) {
-
-    return (
-        <div>
-            <GoogleButton from={props.from} />
-        </div>
-    );
-}
+import React from 'react'
 
 function GoogleButton(props) {
     const [authorized, setAuth] = React.useState(false);
@@ -50,5 +41,5 @@ function GoogleButton(props) {
     );
 }
 
-export default LoginPage;
 
+export default GoogleButton

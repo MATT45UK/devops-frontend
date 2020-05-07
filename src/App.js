@@ -4,8 +4,9 @@ import {
     Switch,
     Route
 } from "react-router-dom";
-import LoginPage from './components/LoginPage'
+import LoginPage from './components/Login/LoginPage'
 import PrivateRoute from './PrivateRoute'
+import HomePage from "./components/Home/HomePage";
 
 const App = () => {
     return (
@@ -19,6 +20,9 @@ const App = () => {
                 </Route>
                 <PrivateRoute path="/protected">
                     <div>SAFE</div>
+                </PrivateRoute>
+                <PrivateRoute path="/home">
+                    <HomePage />
                 </PrivateRoute>
             </Switch>
         </Router>
