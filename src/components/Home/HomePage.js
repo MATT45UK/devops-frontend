@@ -7,14 +7,24 @@ import { useLocation } from 'react-router-dom';
 function HomePage(props) {
     const location = useLocation()
     const classes = useStyles();
+    console.log(props)
 
-    console.log(props.user)
+    if ('user' in props) {
+        return (
+            <Grid container className={classes.root} spacing={2}>
+                <Grid item xs={12}>
+                    <Grid container justify="center" >
+                        <Typography variant="h1">
+                            {`Welcome ${props.user.given_name}`}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </Grid >
+        );
+    } else {
+        return null
+    }
 
-    return (
-        <Grid container className={classes.root} spacing={2}>
-            <div>home</div>
-        </Grid >
-    );
 }
 
 const useStyles = makeStyles((theme) => ({

@@ -7,10 +7,12 @@ module.exports = {
         })
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 if (data.email_verified) {
-                    callback(null, { data, res: true })
+                    console.log('email')
+                    callback(false, data)
                 } else {
-                    callback(data.status, { data: null, res: false })
+                    callback(true, null)
                 }
             });
     }
