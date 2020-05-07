@@ -6,7 +6,8 @@ import {
     Switch,
     Route,
     withRouter,
-    Redirect
+    Redirect,
+    useLocation
 } from "react-router-dom";
 import LoginPage from './components/LoginPage';
 
@@ -15,28 +16,28 @@ import LoginPage from './components/LoginPage';
 // screen if you're not yet authenticated.
 const PrivateRoute = (props) => {
     const { children, history, ...rest } = props;
-    const [authorized, setAuth] = React.useState(false)
+    const [render, setRender] = React.useState([])
+    const [authed, setAuth] = React.useState(false)
+
+    const location = useLocation();
 
     React.useEffect(() => {
-
-    }, [authorized])
-
-    let token = Cookie.get("id_token")
-    auth.validate(token, (err, res) => {
-        if (res) {
-            setAuth(true)
-        }
-    });
+        let token = Cookie.get("id_token")
+        auth.validate(token, (err, res) => {
+            if (res) {
+                setRender(children)
+                setAuth(true)
+            } else {
+                setRender([<Redirect to={{ pathname: `/login`, state: { from: location } }} />])
+            }
+        });
+    }, [authed])
 
     return (
         <Route
             {...rest}
             render={({ location }) =>
-                authorized ? (
-                    children
-                ) : (
-                        <LoginPage />
-                    )
+                render
             }
         />
     );
