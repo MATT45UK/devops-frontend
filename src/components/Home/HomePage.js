@@ -13,8 +13,8 @@ function HomePage(props) {
         return (
             <Grid container className={classes.root} spacing={2}>
                 <Grid item xs={12}>
-                    <Grid container justify="center" >
-                        <Typography variant="h1">
+                    <Grid container>
+                        <Typography variant="h4">
                             {`Welcome ${props.user.given_name}`}
                         </Typography>
                     </Grid>
