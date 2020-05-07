@@ -14,6 +14,10 @@ module.exports = {
                 } else {
                     callback(true, null)
                 }
+            })
+            .catch(() => {
+                console.log('auth error')
+                callback(true, null)
             });
     }
 }
